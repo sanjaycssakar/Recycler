@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private static final int NUM_COLUMNS = 2;
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
 
@@ -56,16 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
-        initRecyclerView();
+        deepak();
     }
 
-    private void initRecyclerView(){
-        Log.d(TAG, "RecyclerView: ");
+    public void deepak(){
+        Log.d(TAG, "deepak: started");
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames,mImageUrls);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        StaggeredViewAdapter staggeredViewAdapter = new StaggeredViewAdapter(this,mNames,mImageUrls );
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(NUM_COLUMNS,LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        recyclerView.setAdapter(staggeredViewAdapter);
 
-    }
-
-}
+}}
